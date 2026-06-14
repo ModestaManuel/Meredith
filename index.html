@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pergunta Muito Importante ❤️</title>
+<title>A Very Important Quiz ❤️</title>
 
 <style>
 body{
@@ -21,105 +21,108 @@ body{
     background:white;
     padding:30px;
     border-radius:25px;
-    width:80%;
+    width:85%;
     max-width:600px;
     text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 h1{
     color:#ff4d6d;
 }
 
-p{
-    font-size:22px;
+#question{
+    font-size:24px;
+    margin:25px 0;
 }
 
 button{
-    padding:15px 30px;
-    font-size:20px;
     border:none;
     border-radius:50px;
     cursor:pointer;
+    padding:15px 30px;
+    font-size:20px;
 }
 
-#sim{
+#yes{
     background:#ff4d6d;
     color:white;
-    margin-right:10px;
+    transition:0.3s;
 }
 
-#nao{
-    position:absolute;
+#no{
     background:#ddd;
+    position:relative;
+    margin-left:10px;
 }
 </style>
 </head>
-
 <body>
 
 <div class="card">
     <h1>❤️ Meredith ❤️</h1>
-    <p id="pergunta">
-        Aceitas que eu te amo muito?
-    </p>
 
-    <button id="sim" onclick="proxima()">Sim ❤️</button>
-    <button id="nao">Não 💔</button>
+    <div id="question">
+        Are you ready for the most important quiz of your life?
+    </div>
+
+    <button id="yes" onclick="nextQuestion()">Yes ❤️</button>
+    <button id="no" onclick="moveNo()">No 💔</button>
 </div>
 
 <script>
 
-const perguntas = [
-"Concordas que fazemos uma boa equipa? 🥰",
-"Concordas que vamos viajar muito juntas? ✈️",
-"Concordas que vamos ter 6 filhos? 👶👶👶",
-"Concordas que a Alaska vai ser a nossa filha favorita? ",
-"Concordas que sou uma excelente candidata a esposa? ",
-"Queres continuar comigo por muito, muito tempo? ❤️"
+const questions = [
+    "Do you love me? ❤️",
+    "Do you think we're an amazing couple? 🥰",
+    "Will we always support each other? ❤️",
+    "Will we travel together someday? ✈️",
+    "Will we have 3 kids? 👶👶👶",
+    "Will Alaska be our favorite daughter? 😂",
+    "Will you keep loving me forever? ❤️"
 ];
 
-let indice = 0;
+let current = 0;
+let yesSize = 20;
 
-function proxima(){
+function nextQuestion(){
 
-    if(indice < perguntas.length){
-        document.getElementById("pergunta").innerHTML = perguntas[indice];
-        indice++;
+    if(current < questions.length){
+        document.getElementById("question").innerHTML = questions[current];
+        current++;
     } else {
-        document.getElementById("pergunta").innerHTML =
-        "Resultado Final ❤️<br><br>" +
-        "Após análise científica extremamente rigorosa, concluímos que:<br><br>" +
-        "✅ Amori, me amas.<br>" +
-        "✅ Vamos ter 6 filhos.<br>" +
-        "✅ A Alaska será a favorita.<br>" +
-        "✅ E seremos muito felizes. 🥰";
 
-        document.getElementById("sim").innerHTML = "❤️ Confirmado ❤️";
+        document.querySelector(".card").innerHTML = `
+            <h1>❤️ Final Results ❤️</h1>
+            <p style="font-size:22px">
+                After an extremely rigorous scientific study, we have concluded that:
+                <br><br>
+                ✅ You love me.<br>
+                ✅ We're an amazing couple.<br>
+                ✅ We'll have 3 kids.<br>
+                ✅ Alaska will be our favorite daughter.<br>
+                ✅ We'll make lots of beautiful memories together.<br><br>
+                ❤️ Case closed. ❤️
+            </p>
+        `;
     }
 }
 
-const nao = document.getElementById("nao");
+function moveNo(){
 
-document.addEventListener("mousemove", (e) => {
+    const noBtn = document.getElementById("no");
 
-    const rect = nao.getBoundingClientRect();
+    noBtn.style.position = "fixed";
+    noBtn.style.left =
+        Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top =
+        Math.random() * (window.innerHeight - 60) + "px";
 
-    const distancia =
-    Math.hypot(
-        e.clientX - (rect.left + rect.width/2),
-        e.clientY - (rect.top + rect.height/2)
-    );
+    yesSize += 8;
 
-    if(distancia < 120){
-        const x = Math.random() * (window.innerWidth - 120);
-        const y = Math.random() * (window.innerHeight - 60);
-
-        nao.style.left = x + "px";
-        nao.style.top = y + "px";
-    }
-});
-
+    document.getElementById("yes").style.fontSize =
+        yesSize + "px";
+}
 </script>
 
 </body>
