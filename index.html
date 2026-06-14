@@ -1,12 +1,9 @@
-<body>
-
-    
-<div class="card">
-    <h1 id="pergunta">Olá Meredith ❤️</h1>
-    <p id="texto">Preparada para responder a algumas perguntas muito importantes?</p>
-
-    <button onclick="proxima()">Sim ❤️</button>
-</div>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pergunta Muito Importante ❤️</title>
 
 <style>
 body{
@@ -17,6 +14,7 @@ body{
     align-items:center;
     background:linear-gradient(135deg,#ff758c,#ff7eb3);
     font-family:Arial,sans-serif;
+    overflow:hidden;
 }
 
 .card{
@@ -38,50 +36,91 @@ p{
 }
 
 button{
-    margin-top:20px;
     padding:15px 30px;
     font-size:20px;
     border:none;
     border-radius:50px;
-    background:#ff4d6d;
-    color:white;
     cursor:pointer;
 }
+
+#sim{
+    background:#ff4d6d;
+    color:white;
+    margin-right:10px;
+}
+
+#nao{
+    position:absolute;
+    background:#ddd;
+}
 </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>❤️ Meredith ❤️</h1>
+    <p id="pergunta">
+        Aceitas que eu te amo muito?
+    </p>
+
+    <button id="sim" onclick="proxima()">Sim ❤️</button>
+    <button id="nao">Não 💔</button>
+</div>
 
 <script>
 
 const perguntas = [
-"Tu sabes que eu te amo muito? ❤️",
-"Mesmo quando finges que não tens saudades minhas? 😒",
-"Concordas que somos duas gostosas incrível? 😌",
-"Concordas que devíamos viver juntas? ",
-"Concordas que os nossos filhos vão ser lindos? 👶",
-"Concordas que vamos ter 6 filhos? 😂",
-"Concordas que a Alaska vai ser a nossa filha favorita? 👀",
-"Concordas que eu sou uma excelente candidata a esposa? ",
-"Então aceitas continuar a aturar-me para sempre? ❤️"
+"Concordas que fazemos uma boa equipa? 🥰",
+"Concordas que vamos viajar muito juntas? ✈️",
+"Concordas que vamos ter 6 filhos? 👶👶👶",
+"Concordas que a Alaska vai ser a nossa filha favorita? ",
+"Concordas que sou uma excelente candidata a esposa? ",
+"Queres continuar comigo por muito, muito tempo? ❤️"
 ];
 
-let i = 0;
+let indice = 0;
 
 function proxima(){
 
-    if(i < perguntas.length){
-        document.getElementById("texto").innerHTML = perguntas[i];
-        i++;
-    }else{
-        document.getElementById("pergunta").innerHTML = "Resultado Final ❤️";
-        document.getElementById("texto").innerHTML =
-        "Parabéns! Após uma análise rigorosa das tuas respostas, concluímos que:<br><br>" +
-        "❤️ Pagar meu 2000.<br>" +
-        "❤️ Vamos ter 6 filhos.<br>" +
-        "❤️ A Alaska será a favorita.<br>" +
-        "❤️ E vamos ser muito felizes juntas. 🥰";
-        document.querySelector("button").innerHTML = "❤️ Eu sabia ❤️";
+    if(indice < perguntas.length){
+        document.getElementById("pergunta").innerHTML = perguntas[indice];
+        indice++;
+    } else {
+        document.getElementById("pergunta").innerHTML =
+        "Resultado Final ❤️<br><br>" +
+        "Após análise científica extremamente rigorosa, concluímos que:<br><br>" +
+        "✅ Amori, me amas.<br>" +
+        "✅ Vamos ter 6 filhos.<br>" +
+        "✅ A Alaska será a favorita.<br>" +
+        "✅ E seremos muito felizes. 🥰";
+
+        document.getElementById("sim").innerHTML = "❤️ Confirmado ❤️";
     }
 }
+
+const nao = document.getElementById("nao");
+
+document.addEventListener("mousemove", (e) => {
+
+    const rect = nao.getBoundingClientRect();
+
+    const distancia =
+    Math.hypot(
+        e.clientX - (rect.left + rect.width/2),
+        e.clientY - (rect.top + rect.height/2)
+    );
+
+    if(distancia < 120){
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 60);
+
+        nao.style.left = x + "px";
+        nao.style.top = y + "px";
+    }
+});
 
 </script>
 
 </body>
+</html>
