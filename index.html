@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mensagem Ultra Secreta ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff6b81,#ff9ff3);
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+}
+
+button{
+    padding:18px 35px;
+    font-size:24px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    background:white;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.card{
+    display:none;
+    background:white;
+    max-width:600px;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:aparecer 1s ease;
+}
+
+h1{
+    color:#ff4d6d;
+}
+
+p{
+    font-size:20px;
+    line-height:1.6;
+    color:#333;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.heart{
+    position:fixed;
+    font-size:25px;
+    animation:subir 5s linear infinite;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <button onclick="mostrarMensagem()">⚠️ NÃO CLIQUES AQUI ⚠️</button>
+
+    <div class="card" id="mensagem">
+        <h1>❤️ Meredith ❤️</h1>
+
+        <p>
+            Eu te amo muito.
+        </p>
+
+        <p>
+            Mesmo quando pareces feliz porque a nossa chamada terminou... 😒😂
+        </p>
+
+        <p>
+            E apesar de todos os teus defeitos (sim, esse também conta),
+            continuo a escolher-te todos os dias. ❤️
+        </p>
+
+        <p>
+            Aliás, já fiz os cálculos e o plano está definido:
+            eu, tu e 3 filhos a fazerem demasiado barulho em casa. 👶👶👶😂
+        </p>
+
+        <p>
+            Assinado:<br>
+            A pessoa que te ama mais do que devia. ❤️
+        </p>
+    </div>
+</div>
+
+<script>
+function mostrarMensagem(){
+    document.querySelector("button").style.display="none";
+    document.getElementById("mensagem").style.display="block";
+}
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 25) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}, 300);
+</script>
+
+</body>
+</html>
